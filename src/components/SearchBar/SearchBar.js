@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import './SearchBar.css';
+import { SearchBarStyle, SearchBarInputStyle, SearchBarProductsStyle, SearchClearButtonStyle } from "./SearchBar.style";
 
 const SearchBar = (props) => {
 
@@ -8,41 +8,30 @@ const SearchBar = (props) => {
 
     const handleInputChange = (e) => setSearchValue(e.target.value);
 
-    const clearInput = () => {
-        if (!searchValue) {
-            alert('Please, type something!')
-        } else {
-            setSearchValue('🧠bye🧠bye🧠');
-            setTimeout(() => {
-                setSearchValue('');
-            }, 250)
-        }
-    }
-
+    const clearInput = () => setSearchValue('')
+    
     const shouldDisplayButton = searchValue.length > 0
 
     const filteredProducts = props.products.filter((product) => {
-        console.log(product);
-        return product.toLowerCase().split('').reverse().join()
-                        .includes(searchValue.split('').reverse().join())
+        return product.toLowerCase().includes(searchValue.toLowerCase())
     })
 
     return (
-        <div className='search-bar'>
-            <input style={{  marginTop: '20px'  }} type='text' value={ searchValue } onChange={ handleInputChange }/>
-            {
-                shouldDisplayButton && <button onClick={ clearInput } className='search-clear-btn'>Clear</button>
-            }
-            <div style={{  marginTop: '20px'  }}>
-                { 
-                    filteredProducts.map((product, index) => (
-                        <li key={ index }>
-                            { product }
-                        </li>
-                    )) 
+        <SearchBarStyle>
+            <p>Search for keywords</p>
+            <div>
+                <SearchBarInputStyle type='text' value={ searchValue } onChange={ handleInputChange }/>
+                {
+                    shouldDisplayButton && 
+                    <SearchClearButtonStyle onClick={ clearInput }>Clear</SearchClearButtonStyle>
                 }
             </div>
-        </div>
+            <SearchBarProductsStyle>
+            { 
+                filteredProducts.map((product, idx) => (<li key={ idx }> { product } </li>)) 
+            }
+            </SearchBarProductsStyle>
+        </SearchBarStyle>
     )
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import Spinner from './Spinner/Spinner';
-import SearchBar from '../components/SearchBar/SearchBar';
+import Spinner from './components/Spinner/Spinner';
+import SearchBar from './components/SearchBar/SearchBar';
 
 const App = () => {
     
@@ -10,25 +10,20 @@ const App = () => {
     const hasProducts = productsState.length > 0;
 
     useEffect (() => {
-
         fetch('https://fakestoreapi.com/products')
         .then(res => res.json())
         .then(productsArray => {
-            const newProductsState = productsArray.map((product) => {
-                return product.title;
-            })
+            const newProductsState = productsArray.map(product => product.title)
             setProductsState(newProductsState)
         })
-
+        .catch(err => console.log(err))
     }, [])
 
     return (
         <div>
-            <div>
-                {
-                   hasProducts ? <SearchBar products={productsState}/> : <Spinner />
-                }
-            </div>
+            {
+                hasProducts ? <SearchBar products={productsState}/> : <Spinner />
+            }
         </div>
     )
 }
