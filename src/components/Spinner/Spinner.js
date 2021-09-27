@@ -1,10 +1,14 @@
 import React from "react";
 
+import LoaderGif from '../../assets/loader.gif'
+
+import SpinnerStyled from "./Spinner.style";
+
 const Spinner = () => {
     return (
-        <div>
-            Loading...
-        </div>
+        <SpinnerStyled>
+            <img src={LoaderGif} />
+        </SpinnerStyled>
     )
 }
 
