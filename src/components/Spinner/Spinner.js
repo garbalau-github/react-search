@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import LoaderGif from '../../assets/loader.gif'
+import LoaderGif from '../../assets/loader.gif';
 
-import SpinnerStyled from "./Spinner.style";
+import SpinnerStyled from './Spinner.style';
 
 const Spinner = () => {
-    return (
-        <SpinnerStyled>
-            <img src={LoaderGif} />
-        </SpinnerStyled>
-    )
-}
+  return (
+    <SpinnerStyled>
+      <img src={LoaderGif} alt='Spinner' />
+    </SpinnerStyled>
+  );
+};
 
 export default Spinner;
